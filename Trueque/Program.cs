@@ -10,25 +10,32 @@ namespace Trueque
     {
         static void Main(string[] args) {
             string Menu = "Bienvenido al sistema de gestion de trueques \n" +
-                        "1- Clientes \n" +
+                        "1- Agregar Objeto \n" +
                         "2- Consultar Objetos \n" +
                         "3- Gestionar Trueque \n" +
-                        "4- Salir";
+                        "4- Guardar cambios \n" +
+                        "5- Salir";
             string opcion = "";
             while (opcion == "") {
                 Console.WriteLine(Menu);
                 opcion=Console.ReadLine();
-                if (opcion == "1" | opcion == "2" | opcion == "3" | opcion == "4") {
+                if (opcion == "1" | opcion == "2" | opcion == "3" | opcion == "4" | opcion == "5") {
                     switch (opcion) {
                         case "1":
-                            //Clientes (sub menu con 2 metodos)
-                            //1- Agregar cliente (permite agregar un cliente)
-                            //2- Agregar producto (permite agregar un producto asignandoselo a un cliente)
+                            //Se agrega el objeto
+                            //se buscan preferencias
+                            //si hay match se despliega el objeto en pantalla
+                            //se consulta si desea realizar el cambio
+                            //se realiza el cambio de objetos, guardando el trueque en el hitorico y eliminacion de ambos objetos en la lista objetos
                             break;
                         case "2":
-                            //Consultar objetos(sub menu con 2 metodos)
-                            //este metodo debe contener un sub-menu en donde permita consultar todos los objetos,
-                            //y otro en donde permita consultar los objetos por antiguedad desde el mas antiguo al mas nuevo
+                            //Consultar objetos
+                            // -1
+                            //  -1.1 buscar objetos por nombre y/o id
+                            //  -1.2 desplegar lista de objetos desde el mas antiguo
+                            // -2 articulos no disponibles
+                            //  -2.1 desplegar lista de objetos no disponibles con informcion del cliente
+                            //  -2.2 buscar objetos no disp. por nombre cliente o id
                             break;
                         case "3":
                             //Gestionar trueque(metodo)
@@ -39,14 +46,14 @@ namespace Trueque
                             //despues de guardar en la lista se deben eliminar los objetos seleccionados de la lista objetos
                             break;
                     }
-                        if (opcion == "1" | opcion == "2" | opcion == "3") {
+                        if (opcion == "1" | opcion == "2" | opcion == "3" | opcion =="4") {
                         opcion = "";
                         } 
                     } else {
                     opcion = "";
                     Console.Clear();
                     Console.WriteLine("Opcion ingresada no valida, Reingrese una opcion valida");
-                }
+                    }
             }
             //metodos
 
