@@ -15,7 +15,9 @@ namespace Trueque
         static void Main(string[] args) {
 
             LeerObjetos();
+            LeerObjetosNoDisp();
             GuardarListaObjetos();
+            GuardarListaObjetosNoDisp();
 
             string Menu = "Bienvenido al sistema de gestion de trueques \n" +
                         "1- Agregar Objetos \n" +
@@ -53,6 +55,9 @@ namespace Trueque
                             //al realizar el cambio hay que guardar los objetos como strings en una lista que se debe llamar trueques
                             //despues de guardar en la lista se deben eliminar los objetos seleccionados de la lista objetos
                             break;
+                        case "4":
+                            //guardar cambios
+                            break;
                     }
                         if (opcion == "1" | opcion == "2" | opcion == "3" | opcion =="4") {
                         opcion = "";
@@ -66,6 +71,7 @@ namespace Trueque
         }
         //metodos
         private static List<Objeto> losObjetos = new List<Objeto>();
+        private static List<Objeto> objetosNoDisp = new List<Objeto>();
         public static void LeerObjetos() {
             string ruta = "Objetos.txt";
             using (StreamReader sr = new StreamReader(ruta)) {
@@ -75,6 +81,25 @@ namespace Trueque
                     do {
                         string[] campos = linea.Split('|');
                         losObjetos.Add(new Objeto(Int32.Parse(campos[0]), campos[1], campos[2], Int32.Parse(campos[3]), campos[4], campos[5], campos[6], campos[7]));
+                        linea = sr.ReadLine();
+                    } while (linea != null);
+                } catch (Exception e) {
+                    Console.WriteLine("!!ERROR¡¡--> " + e.ToString());
+                } finally {
+                    sr.Dispose();
+                    sr.Close();
+                }
+            }
+        }
+        public static void LeerObjetosNoDisp() {
+            string ruta = "ObjetosNoDisponibles.txt";
+            using (StreamReader sr = new StreamReader(ruta)) {
+                try {
+                    string linea;
+                    linea = sr.ReadLine();
+                    do {
+                        string[] campos = linea.Split('|');
+                        objetosNoDisp.Add(new Objeto(Int32.Parse(campos[0]), campos[1], campos[2], Int32.Parse(campos[3]), campos[4], campos[5], campos[6], campos[7]));
                         linea = sr.ReadLine();
                     } while (linea != null);
                 } catch (Exception e) {
@@ -100,6 +125,29 @@ namespace Trueque
                 //Guardar lista losObjetos
                 foreach (Objeto obj in losObjetos) { 
                     sw.WriteLine(obj.Id.ToString()+"|"+obj.Descripcion.ToString()+"|"+obj.NombrePropietario.ToString()+"|"+obj.Valor.ToString()+"|"+obj.Preferencia1.ToString()+"|"+ obj.Preferencia2.ToString()+"|"+ obj.Preferencia3.ToString()+"|"+obj.FechaIngreso.ToString());
+                }
+            } catch (Exception ex) {
+                Console.WriteLine("Error ->" + ex.ToString());
+            } finally {
+                sw.Dispose();
+                sw.Close();
+            }
+        }
+        private static void GuardarListaObjetosNoDisp() {
+            string ruta = "ObjetosNoDisponibles.txt";
+
+            StreamWriter sw = new StreamWriter(ruta, false);
+
+            try {
+                //Elementos de prueba
+                //sw.WriteLine("05|Computador hp|Erik1|250000|Monitor|PS4|Nintendo Switch");
+                //sw.WriteLine("02|Computador hp|Erik2|150000|Monitor|PS4|Nintendo Switch");
+                //sw.WriteLine("03|Computador hp|Erik3|450000|Monitor|PS4|Nintendo Switch");
+                //sw.WriteLine("04|Computador hp|Erik4|550000|Monitor|PS4|Nintendo Switch");
+
+                //Guardar lista losObjetos
+                foreach (Objeto obj in objetosNoDisp) {
+                    sw.WriteLine(obj.Id.ToString() + "|" + obj.Descripcion.ToString() + "|" + obj.NombrePropietario.ToString() + "|" + obj.Valor.ToString() + "|" + obj.Preferencia1.ToString() + "|" + obj.Preferencia2.ToString() + "|" + obj.Preferencia3.ToString() + "|" + obj.FechaIngreso.ToString());
                 }
             } catch (Exception ex) {
                 Console.WriteLine("Error ->" + ex.ToString());
