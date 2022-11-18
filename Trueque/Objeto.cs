@@ -26,9 +26,12 @@ namespace Trueque {
         public string Preferencia1 { get; set; }
         public string Preferencia2 { get; set; }
         public string Preferencia3 { get; set; }
-        public string FechaIngreso { get; }
+        public string FechaIngreso { get; set; }
 
         //Contructor
+        public Objeto() { 
+        
+        }
         public Objeto(int id, string descripcion,string nombrepropietario, int valor, string preferencia1, string preferencia2, string preferencia3,string fechaingreso) {
             Id = id;
             Descripcion = descripcion;
