@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,9 +11,13 @@ namespace Trueque
 {
     internal class Program
     {
+        
         static void Main(string[] args) {
+
+            LeerObjetos();
+
             string Menu = "Bienvenido al sistema de gestion de trueques \n" +
-                        "1- Agregar Objeto \n" +
+                        "1- Agregar Objetos \n" +
                         "2- Consultar Objetos \n" +
                         "3- Gestionar Trueque \n" +
                         "4- Guardar cambios \n" +
@@ -54,9 +61,28 @@ namespace Trueque
                     Console.Clear();
                     Console.WriteLine("Opcion ingresada no valida, Reingrese una opcion valida");
                     }
+            }          
+        }
+        //metodos
+        private static List<Objeto> losObjetos = new List<Objeto>();
+        public static void LeerObjetos() {
+            string ruta = "Objetos.txt";
+            using (StreamReader sr = new StreamReader(ruta)) {
+                try {
+                    string linea;
+                    linea = sr.ReadLine();
+                    do {
+                        string[] campos = linea.Split('|');
+                        losObjetos.Add(new Objeto(Int32.Parse(campos[0]), campos[1], campos[2], Int32.Parse(campos[3]), campos[4], campos[5], campos[6]));
+                        linea = sr.ReadLine();
+                    } while (linea != null);
+                } catch (Exception e) {
+                    Console.WriteLine("!!ERROR¡¡--> " + e.ToString());
+                } finally {
+                    sr.Dispose();
+                    sr.Close();
+                }
             }
-            //metodos
-
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Trueque {
         //propiedades del objeto
         //-ID
         //-Descripcion
+        //-Nombre Propietario
         //-Fecha de ingreso
         //-Valor
         //-Preferencia 1
@@ -19,6 +20,7 @@ namespace Trueque {
         public DateTime hoy = DateTime.Now;
         public int Id { get; set; }
         public string Descripcion { get; set; }
+        public string NombrePropietario { get; set; }
         public DateTime FechaIngreso {
             get { return hoy; }
         }
@@ -28,9 +30,10 @@ namespace Trueque {
         public string Preferencia3 { get; set; }
 
         //Contructor
-        public Objeto(int id, string descripcion, int valor, string preferencia1, string preferencia2, string preferencia3) {
+        public Objeto(int id, string descripcion,string nombrepropietario, int valor, string preferencia1, string preferencia2, string preferencia3) {
             Id = id;
             Descripcion = descripcion;
+            NombrePropietario = nombrepropietario;
             Valor = valor;
             Preferencia1 = preferencia1;
             Preferencia2 = preferencia2;
