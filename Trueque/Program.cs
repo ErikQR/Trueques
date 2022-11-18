@@ -15,6 +15,7 @@ namespace Trueque
         static void Main(string[] args) {
 
             LeerObjetos();
+            GuardarListaObjetos();
 
             string Menu = "Bienvenido al sistema de gestion de trueques \n" +
                         "1- Agregar Objetos \n" +
@@ -82,6 +83,29 @@ namespace Trueque
                     sr.Dispose();
                     sr.Close();
                 }
+            }
+        }
+        private static void GuardarListaObjetos() {
+            string ruta = "Objetos.txt";
+
+            StreamWriter sw = new StreamWriter(ruta, false);
+
+            try {
+                //Elementos de prueba
+                //sw.WriteLine("05|Computador hp|Erik1|250000|Monitor|PS4|Nintendo Switch");
+                //sw.WriteLine("02|Computador hp|Erik2|150000|Monitor|PS4|Nintendo Switch");
+                //sw.WriteLine("03|Computador hp|Erik3|450000|Monitor|PS4|Nintendo Switch");
+                //sw.WriteLine("04|Computador hp|Erik4|550000|Monitor|PS4|Nintendo Switch");
+
+                //Guardar lista losObjetos
+                foreach (Objeto obj in losObjetos) { 
+                    sw.WriteLine(obj.Id.ToString()+"|"+obj.Descripcion.ToString()+"|"+obj.NombrePropietario.ToString()+"|"+obj.Valor.ToString()+"|"+obj.Preferencia1.ToString()+"|"+ obj.Preferencia2.ToString()+"|"+ obj.Preferencia3.ToString());
+                }
+            } catch (Exception ex) {
+                Console.WriteLine("Error ->" + ex.ToString());
+            } finally {
+                sw.Dispose();
+                sw.Close();
             }
         }
     }
