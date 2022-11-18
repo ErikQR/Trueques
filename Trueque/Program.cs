@@ -74,7 +74,7 @@ namespace Trueque
                     linea = sr.ReadLine();
                     do {
                         string[] campos = linea.Split('|');
-                        losObjetos.Add(new Objeto(Int32.Parse(campos[0]), campos[1], campos[2], Int32.Parse(campos[3]), campos[4], campos[5], campos[6]));
+                        losObjetos.Add(new Objeto(Int32.Parse(campos[0]), campos[1], campos[2], Int32.Parse(campos[3]), campos[4], campos[5], campos[6], campos[7]));
                         linea = sr.ReadLine();
                     } while (linea != null);
                 } catch (Exception e) {
@@ -99,7 +99,7 @@ namespace Trueque
 
                 //Guardar lista losObjetos
                 foreach (Objeto obj in losObjetos) { 
-                    sw.WriteLine(obj.Id.ToString()+"|"+obj.Descripcion.ToString()+"|"+obj.NombrePropietario.ToString()+"|"+obj.Valor.ToString()+"|"+obj.Preferencia1.ToString()+"|"+ obj.Preferencia2.ToString()+"|"+ obj.Preferencia3.ToString());
+                    sw.WriteLine(obj.Id.ToString()+"|"+obj.Descripcion.ToString()+"|"+obj.NombrePropietario.ToString()+"|"+obj.Valor.ToString()+"|"+obj.Preferencia1.ToString()+"|"+ obj.Preferencia2.ToString()+"|"+ obj.Preferencia3.ToString()+"|"+obj.FechaIngreso.ToString());
                 }
             } catch (Exception ex) {
                 Console.WriteLine("Error ->" + ex.ToString());
