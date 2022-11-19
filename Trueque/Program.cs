@@ -17,9 +17,9 @@ namespace Trueque
         static void Main(string[] args) {
 
             LeerObjetos();
-            LeerObjetosNoDisp();
-            GuardarListaObjetos();
-            GuardarListaObjetosNoDisp();
+            //LeerObjetosNoDisp();
+            
+            //GuardarListaObjetosNoDisp();
 
             string Menu = "Bienvenido al sistema de gestion de trueques \n" +
                         "1- Agregar Objetos \n" +
@@ -34,6 +34,7 @@ namespace Trueque
                 if (opcion == "1" | opcion == "2" | opcion == "3" | opcion == "4" | opcion == "5") {
                     switch (opcion) {
                         case "1":
+                            AgregarObjeto();
                             //Se agrega el objeto
                             //se buscan preferencias
                             //si hay match se despliega el objeto en pantalla
@@ -59,6 +60,7 @@ namespace Trueque
                             break;
                         case "4":
                             //guardar cambios
+                            GuardarListaObjetos();
                             break;
                     }
                         if (opcion == "1" | opcion == "2" | opcion == "3" | opcion =="4") {
@@ -69,7 +71,9 @@ namespace Trueque
                     Console.Clear();
                     Console.WriteLine("Opcion ingresada no valida, Reingrese una opcion valida");
                     }
-            }          
+            }  
+            
+            
         }
         //metodos
         private static List<Objeto> losObjetos = new List<Objeto>();
@@ -157,7 +161,7 @@ namespace Trueque
                 string agregarobj = "Seleccione los campos del objeto a ingresar \n" +
                     "\n" +
                     "1- Id: " + obj.Id + "\n" +
-                    "2- Descripcion" + obj.Descripcion + "\n" +
+                    "2- Descripcion: " + obj.Descripcion + "\n" +
                     "3- Nombre del Propietario: " + obj.NombrePropietario + "\n" +
                     "4- Valor aproximado del Objeto: " + obj.Valor + "\n" +
                     "5- Preferencia N°1 para el intercambio: " + obj.Preferencia1 + "\n" +
@@ -169,8 +173,8 @@ namespace Trueque
                 Console.WriteLine(agregarobj);
                 opc = Console.ReadLine();
                 Console.Clear();
-                if (opc =="1"| opc == "2"| opc == "3"| opc == "4"| opc == "5"| opc == "6"| opc == "7"| opc == "8"| opc == "9"| opc == "10") {
-                    switch (opc) { 
+                if (opc == "1" | opc == "2" | opc == "3" | opc == "4" | opc == "5" | opc == "6" | opc == "7" | opc == "8" | opc == "9" | opc == "10") {
+                    switch (opc) {
                         case "1":
                             bool num = false;
                             while (!num) {
@@ -208,7 +212,7 @@ namespace Trueque
                         case "3":
                             string NomProp = "";
                             while (NomProp == "") {
-                                Console.WriteLine("Ingrese nombre del propietario del objeto (Formato: NombreApellido)");
+                                Console.WriteLine("Ingrese nombre del propietario del objeto (Formato: Nombre Apellido)");
                                 NomProp = Console.ReadLine();
                                 Console.Clear();
                             }
@@ -253,7 +257,7 @@ namespace Trueque
                             string pref3 = "";
                             while (pref3 == "") {
                                 Console.WriteLine("Ingrese tercer objeto de preferencia para el intercambio");
-                                pref1 = Console.ReadLine();
+                                pref3 = Console.ReadLine();
                                 Console.Clear();
                             }
                             if (pref3 != "") obj.Preferencia3 = pref3;
@@ -261,7 +265,7 @@ namespace Trueque
                         case "8":
                             string fechaIng = "";
                             while (fechaIng == "") {
-                                Console.WriteLine("Ingrese 1 para guardar fecha Actual: "+DateTime.Today);
+                                Console.WriteLine("Ingrese 1 para guardar fecha Actual: " + DateTime.Today);
                                 fechaIng = Console.ReadLine();
                                 Console.Clear();
                             }
@@ -277,16 +281,61 @@ namespace Trueque
                                 if (obj.Descripcion == "" | obj.Descripcion == null) Console.WriteLine("Debe asignar una descripcion al objeto");
                                 if (obj.NombrePropietario == "" | obj.NombrePropietario == null) Console.WriteLine("Debe asignar nombre del propietario del objeto");
                                 if (obj.Valor == 0) Console.WriteLine("Debe ingresar valor aproximado del objeto");
-                                //-----------------------------------------------
-                                //seguir con la validacion de los datos ingresados
-                                //------------------------------------------------
+                                if (obj.Id != 0 && obj.Valor != 0 && (obj.Descripcion != null && obj.Descripcion != "") && (obj.NombrePropietario != null && obj.NombrePropietario != "")
+                                    && (obj.Preferencia1 != null && obj.Preferencia1 != "") && (obj.Preferencia2 != null && obj.Preferencia2 != "")
+                                    && (obj.Preferencia3 != null && obj.Preferencia3 != "") && (obj.FechaIngreso != null && obj.FechaIngreso != "")) {
+                                    string opcAgregar = "";
+                                    while (opcAgregar == "") {
+                                        Console.WriteLine("¿Desea agregar al jugador el objeto con los siguientes datos?: \n" +
+                                            "\n" +
+                                            "-ID: " + obj.Id + "\n" +
+                                            "-Descripcion: " + obj.Descripcion + "\n" +
+                                            "-Nombre Propietario: " + obj.NombrePropietario + "\n" +
+                                            "-Valor aproximado: " + obj.Valor + "\n" +
+                                            "-Preferencia 1: " + obj.Preferencia1 + "\n" +
+                                            "-Preferencia 2: " + obj.Preferencia2 + "\n" +
+                                            "-Preferencia 3: " + obj.Preferencia3 + "\n" +
+                                            "-Fecha de ingreso: " + obj.FechaIngreso + "\n" +
+                                            "\n" +
+                                            "-1 Guardar \n" +
+                                            "-2 Cancelar \n");
+                                        opcAgregar = Console.ReadLine();
+                                        if (opcAgregar == "1" | opcAgregar == "2") {
+                                            switch (opcAgregar) {
+                                                case "1":
+                                                    losObjetos.Add(obj);
+                                                    Console.WriteLine("Se agrego el objeto correctamente. Presione una tecla para continuar");
+                                                    agregar = true;
+                                                    break;
+                                                case "2":
+                                                    Console.Clear();
+                                                    break;
+                                            }
+                                        } else {
+                                            Console.Clear();
+                                            Console.WriteLine("Seleccione una opcion valida");
+                                            opcAgregar = "";
+                                        }
+                                    }
+                                }
                             }
+                            break;
+                        case "10":
+                            cancelar = true;
+                            Console.WriteLine("Se cancela el registro del objeto. Presione cualquier tecla para continuar");
                             break;
 
                     }
+                } else {
+                    opc = "";
+                    Console.Clear();
+                    Console.WriteLine("Opcion ingresada no valida, ingrese una opcion valida");
                 }
             }
+            Console.ReadKey();
+            Console.Clear();
         }
+        
         public static Objeto BuscarObj(int ids) {
             Objeto obj = new Objeto();
             List<Objeto> idObjs = (from id in losObjetos
