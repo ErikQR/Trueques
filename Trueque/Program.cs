@@ -58,10 +58,6 @@ namespace Trueque
                             //al realizar el cambio hay que guardar los objetos como strings en una lista que se debe llamar trueques
                             //despues de guardar en la lista se deben eliminar los objetos seleccionados de la lista objetos
                             break;
-                        case "4":
-                            //guardar cambios
-                            GuardarListaObjetos();
-                            break;
                     }
                         if (opcion == "1" | opcion == "2" | opcion == "3" | opcion =="4") {
                         opcion = "";
@@ -154,6 +150,7 @@ namespace Trueque
         public static void AgregarObjeto() {
             Console.Clear();
             Objeto obj=new Objeto();
+            obj.FechaIngreso = DateTime.Today.ToString();
             bool agregar = false;
             bool cancelar = false;
             string opc = "";
@@ -262,6 +259,7 @@ namespace Trueque
                             }
                             if (pref3 != "") obj.Preferencia3 = pref3;
                             break;
+                            /*
                         case "8":
                             string fechaIng = "";
                             while (fechaIng == "") {
@@ -273,8 +271,8 @@ namespace Trueque
                             else {
                                 Console.WriteLine("Es obligatorio guardar la fecha del registro del objeto!");
                             }
-                            break;
-                        case "9":
+                            break;*/
+                        case "8":
                             Console.Clear();
                             if (!agregar) {
                                 if (obj.Id == 0) Console.WriteLine("Debe asignar un id al objeto");
@@ -303,6 +301,7 @@ namespace Trueque
                                         if (opcAgregar == "1" | opcAgregar == "2") {
                                             switch (opcAgregar) {
                                                 case "1":
+                                                    //TO-DO: Guardar en la lista
                                                     losObjetos.Add(obj);
                                                     Console.WriteLine("Se agrego el objeto correctamente. Presione una tecla para continuar");
                                                     agregar = true;
@@ -320,7 +319,7 @@ namespace Trueque
                                 }
                             }
                             break;
-                        case "10":
+                        case "9":
                             cancelar = true;
                             Console.WriteLine("Se cancela el registro del objeto. Presione cualquier tecla para continuar");
                             break;
