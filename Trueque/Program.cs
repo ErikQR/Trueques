@@ -42,6 +42,7 @@ namespace Trueque
                             //se realiza el cambio de objetos, guardando el trueque en el hitorico y eliminacion de ambos objetos en la lista objetos
                             break;
                         case "2":
+                            Buscar();
                             //Consultar objetos
                             // -1
                             //  -1.1 buscar objetos por nombre y/o id
@@ -359,50 +360,60 @@ namespace Trueque
             }          
             return obj;
         }
-        public static Objeto PerfectMatch(string pref1, string desc) {
+        public static List<Objeto> PerfectMatch(string pref1, string desc) {
             Objeto obj = new Objeto();
             List<Objeto> prefObj = (from prefUno in losObjetos
                                     where prefUno.Descripcion == pref1 && prefUno.Preferencia1 == desc 
                                     select prefUno).ToList();
+            /*
             foreach (Objeto prefUno in prefObj) {
                 Console.WriteLine("ID: " + prefUno.Id + " Descripcion: " + prefUno.Descripcion + " Nombre Propietario: " + prefUno.NombrePropietario + " Valor aprox. Objeto: " + prefUno.Valor + "Preferencia 1: " + prefUno.Preferencia1 + " Preferencia 2: " + prefUno.Preferencia2 + " Preferencia 3: " + prefUno.Preferencia3 );
                 obj = prefUno;
-            }
-            return obj;
+            }*/
+            return prefObj;
         }
-        public static Objeto SecondaryMatch(string pref2, string desc) {
+        public static List<Objeto> SecondaryMatch(string pref2, string desc) {
             Objeto obj = new Objeto();
             List<Objeto> prefObj = (from prefDos in losObjetos
                                     where prefDos.Descripcion == pref2 && prefDos.Preferencia2 == desc
                                     select prefDos).ToList();
+            /*
             foreach (Objeto prefDos in prefObj) {
                 Console.WriteLine("ID: " + prefDos.Id + " Descripcion: " + prefDos.Descripcion + " Nombre Propietario: " + prefDos.NombrePropietario + " Valor aprox. Objeto: " + prefDos.Valor + "Preferencia 1: " + prefDos.Preferencia1 + " Preferencia 2: " + prefDos.Preferencia2 + " Preferencia 3: " + prefDos.Preferencia3);
                 obj = prefDos;
-            }
-            return obj;
+            }*/
+
+            return prefObj;
         }
-        public static Objeto ThirdMatch(string pref3, string desc) {
+        public static List<Objeto> ThirdMatch(string pref3, string desc) {
             Objeto obj = new Objeto();
             List<Objeto> prefObj = (from prefTres in losObjetos
                                     where prefTres.Descripcion == pref3 && prefTres.Preferencia3 == desc
                                     select prefTres).ToList();
+            /*
             foreach (Objeto prefTres in prefObj) {
                 Console.WriteLine("ID: " + prefTres.Id + " Descripcion: " + prefTres.Descripcion + " Nombre Propietario: " + prefTres.NombrePropietario + " Valor aprox. Objeto: " + prefTres.Valor + "Preferencia 1: " + prefTres.Preferencia1 + " Preferencia 2: " + prefTres.Preferencia2 + " Preferencia 3: " + prefTres.Preferencia3);
                 obj = prefTres;
-            }
-            return obj;
+            }*/
+
+            return prefObj;
         }
-        public static Objeto ListMatch(string desc) {
+        public static List<Objeto> ListMatch(string desc) {
             Objeto obj = new Objeto();
             List<Objeto> descObj = (from descripcion in losObjetos
                                     where descripcion.Preferencia1 == desc || descripcion.Preferencia2 == desc || descripcion.Preferencia3 == desc
                                     select descripcion).ToList();
+            //ToDo eliminar ya que este foreach es solo para mostrar en consola
+            /*
             foreach (Objeto descripcion in descObj) {
                 Console.WriteLine("ID: " + descripcion.Id + " Descripcion: " + descripcion.Descripcion + " Nombre Propietario: " + descripcion.NombrePropietario + " Valor aprox. Objeto: " + descripcion.Valor + "Preferencia 1: " + descripcion.Preferencia1 + " Preferencia 2: " + descripcion.Preferencia2 + " Preferencia 3: " + descripcion.Preferencia3);
                 obj = descripcion;
-            }
-            return obj;
+            }*/
+            return descObj;
         }
+
+        public static void Buscar() {
+            }
 
     }
 }
