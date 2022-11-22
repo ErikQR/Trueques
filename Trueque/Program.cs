@@ -413,7 +413,36 @@ namespace Trueque
         }
 
         public static void Buscar() {
+            string MenuBuscar = "Indique la opción de búsqueda: \n" +
+                        "1 = Buscar objetos disponibles \n" +
+                        "2 = Buscar objetos no disponibles \n" +
+                        "3 = Salir \n";
+            string opc = "";
+            while (opc!="3") {
+                Console.Clear();
+                Console.WriteLine(MenuBuscar);
+                opc= Console.ReadLine();
+                if(opc=="1" | opc=="2" | opc=="3"){
+                    Boolean num = false;
+                    //TODO: agregar métodos
+                    if (opc == "1") {
+                        Console.WriteLine("Ingrese texto o id a buscar:");
+
+
+
+                    }
+
+                } else {
+                    Console.Clear() ;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("La opción indicada no existe, favor indicar una opción válida");
+                    Console.ReadKey();
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+
+
             }
+        }
 
     }
 }
