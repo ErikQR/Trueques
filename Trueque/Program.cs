@@ -25,13 +25,13 @@ namespace Trueque
                         "1- Agregar Objetos \n" +
                         "2- Consultar Objetos \n" +
                         "3- Gestionar Trueque \n" +
-                        "4- Guardar cambios \n" +
-                        "5- Salir";
+                        "4- Salir";
+
             string opcion = "";
             while (opcion == "") {
                 Console.WriteLine(Menu);
                 opcion=Console.ReadLine();
-                if (opcion == "1" | opcion == "2" | opcion == "3" | opcion == "4" | opcion == "5") {
+                if (opcion == "1" | opcion == "2" | opcion == "3" | opcion == "4") {
                     switch (opcion) {
                         case "1":
                             AgregarObjeto();
@@ -51,6 +51,7 @@ namespace Trueque
                             //  -2.2 buscar objetos no disp. por nombre cliente o id
                             break;
                         case "3":
+                            
                             //Gestionar trueque(metodo)
                             //Esta opcion permite permutar 2 productos, en un inicio se debe buscar en la lista de objetos el 1er objeto a permutar
                             //luego de seleccionar el primer producto, se muestra en pantalla y permite buscar el 2do objeto a permutar,
@@ -59,7 +60,7 @@ namespace Trueque
                             //despues de guardar en la lista se deben eliminar los objetos seleccionados de la lista objetos
                             break;
                     }
-                        if (opcion == "1" | opcion == "2" | opcion == "3" | opcion =="4") {
+                        if (opcion == "1" | opcion == "2" | opcion == "3") {
                         opcion = "";
                         } 
                     } else {
@@ -157,6 +158,7 @@ namespace Trueque
             while (!agregar && !cancelar) {
                 string agregarobj = "Seleccione los campos del objeto a ingresar \n" +
                     "\n" +
+                    "Fecha: " + obj.FechaIngreso + "\n" +
                     "1- Id: " + obj.Id + "\n" +
                     "2- Descripcion: " + obj.Descripcion + "\n" +
                     "3- Nombre del Propietario: " + obj.NombrePropietario + "\n" +
@@ -164,13 +166,12 @@ namespace Trueque
                     "5- Preferencia N°1 para el intercambio: " + obj.Preferencia1 + "\n" +
                     "6- Preferencia N°2 para el intercambio: " + obj.Preferencia2 + "\n" +
                     "7- Preferencia N°3 para el intercambio: " + obj.Preferencia3 + "\n" +
-                    "8- Fecha de Ingreso del objeto: " + obj.FechaIngreso + "\n" +
-                    "9- Guardar \n" +
-                    "10- Cancelar \n";
+                    "8- Guardar \n" +
+                    "9- Cancelar \n";
                 Console.WriteLine(agregarobj);
                 opc = Console.ReadLine();
                 Console.Clear();
-                if (opc == "1" | opc == "2" | opc == "3" | opc == "4" | opc == "5" | opc == "6" | opc == "7" | opc == "8" | opc == "9" | opc == "10") {
+                if (opc == "1" | opc == "2" | opc == "3" | opc == "4" | opc == "5" | opc == "6" | opc == "7" | opc == "8" | opc == "9") {
                     switch (opc) {
                         case "1":
                             bool num = false;
@@ -259,19 +260,6 @@ namespace Trueque
                             }
                             if (pref3 != "") obj.Preferencia3 = pref3;
                             break;
-                            /*
-                        case "8":
-                            string fechaIng = "";
-                            while (fechaIng == "") {
-                                Console.WriteLine("Ingrese 1 para guardar fecha Actual: " + DateTime.Today);
-                                fechaIng = Console.ReadLine();
-                                Console.Clear();
-                            }
-                            if (fechaIng == "1") obj.FechaIngreso = DateTime.Today.ToString();
-                            else {
-                                Console.WriteLine("Es obligatorio guardar la fecha del registro del objeto!");
-                            }
-                            break;*/
                         case "8":
                             Console.Clear();
                             if (!agregar) {
@@ -303,7 +291,34 @@ namespace Trueque
                                                 case "1":
                                                     //TO-DO: Guardar en la lista
                                                     losObjetos.Add(obj);
-                                                    Console.WriteLine("Se agrego el objeto correctamente. Presione una tecla para continuar");
+                                                    GuardarListaObjetos();
+
+                                                    
+                                                    Console.WriteLine("Se agrego el objeto correctamente.\n");
+                                                    //realizar busqueda de coincidencias del objeto recien ingresado
+                                                    string siNo = "";
+                                                    while (siNo == "") { 
+                                                        Console.WriteLine(
+                                                            "\n"+
+                                                            "Desea buscar si existen objetos que coincidan con sus preferencias?" +
+                                                            "\n"+
+                                                            "1-Si \n"+
+                                                            "2-No ");
+                                                        siNo = Console.ReadLine();
+                                                        if (siNo == "1" | siNo == "2") {
+                                                            switch (siNo) {
+                                                                case "1":
+                                                                    //se deben buscar si existen coincidencias del objeto recien ingresado
+                                                                    break;
+                                                                case "2":
+
+                                                                    break;
+                                                            
+                                                            }
+                                                        }
+                                                    }
+                                                    
+
                                                     agregar = true;
                                                     break;
                                                 case "2":
@@ -346,5 +361,50 @@ namespace Trueque
             }          
             return obj;
         }
+        public static Objeto PerfectMatch(string pref1, string desc) {
+            Objeto obj = new Objeto();
+            List<Objeto> prefObj = (from prefUno in losObjetos
+                                    where prefUno.Descripcion == pref1 && prefUno.Preferencia1 == desc 
+                                    select prefUno).ToList();
+            foreach (Objeto prefUno in prefObj) {
+                Console.WriteLine("ID: " + prefUno.Id + " Descripcion: " + prefUno.Descripcion + " Nombre Propietario: " + prefUno.NombrePropietario + " Valor aprox. Objeto: " + prefUno.Valor + "Preferencia 1: " + prefUno.Preferencia1 + " Preferencia 2: " + prefUno.Preferencia2 + " Preferencia 3: " + prefUno.Preferencia3 );
+                obj = prefUno;
+            }
+            return obj;
+        }
+        public static Objeto SecondaryMatch(string pref2, string desc) {
+            Objeto obj = new Objeto();
+            List<Objeto> prefObj = (from prefDos in losObjetos
+                                    where prefDos.Descripcion == pref2 && prefDos.Preferencia2 == desc
+                                    select prefDos).ToList();
+            foreach (Objeto prefDos in prefObj) {
+                Console.WriteLine("ID: " + prefDos.Id + " Descripcion: " + prefDos.Descripcion + " Nombre Propietario: " + prefDos.NombrePropietario + " Valor aprox. Objeto: " + prefDos.Valor + "Preferencia 1: " + prefDos.Preferencia1 + " Preferencia 2: " + prefDos.Preferencia2 + " Preferencia 3: " + prefDos.Preferencia3);
+                obj = prefDos;
+            }
+            return obj;
+        }
+        public static Objeto BuscarPref3(string pref3, string desc) {
+            Objeto obj = new Objeto();
+            List<Objeto> prefObj = (from prefTres in losObjetos
+                                    where prefTres.Descripcion == pref3 && prefTres.Preferencia3 == desc
+                                    select prefTres).ToList();
+            foreach (Objeto prefTres in prefObj) {
+                Console.WriteLine("ID: " + prefTres.Id + " Descripcion: " + prefTres.Descripcion + " Nombre Propietario: " + prefTres.NombrePropietario + " Valor aprox. Objeto: " + prefTres.Valor + "Preferencia 1: " + prefTres.Preferencia1 + " Preferencia 2: " + prefTres.Preferencia2 + " Preferencia 3: " + prefTres.Preferencia3);
+                obj = prefTres;
+            }
+            return obj;
+        }
+        public static Objeto ListMatch(string desc) {
+            Objeto obj = new Objeto();
+            List<Objeto> descObj = (from descripcion in losObjetos
+                                    where descripcion.Preferencia1 == desc || descripcion.Preferencia2 == desc || descripcion.Preferencia3 == desc
+                                    select descripcion).ToList();
+            foreach (Objeto descripcion in descObj) {
+                Console.WriteLine("ID: " + descripcion.Id + " Descripcion: " + descripcion.Descripcion + " Nombre Propietario: " + descripcion.NombrePropietario + " Valor aprox. Objeto: " + descripcion.Valor + "Preferencia 1: " + descripcion.Preferencia1 + " Preferencia 2: " + descripcion.Preferencia2 + " Preferencia 3: " + descripcion.Preferencia3);
+                obj = descripcion;
+            }
+            return obj;
+        }
+
     }
 }
