@@ -287,6 +287,7 @@ namespace Trueque
                                             "-1 Guardar \n" +
                                             "-2 Cancelar \n");
                                         opcAgregar = Console.ReadLine();
+                                        Console.Clear();
                                         if (opcAgregar == "1" | opcAgregar == "2") {
                                             switch (opcAgregar) {
                                                 case "1":
@@ -296,6 +297,7 @@ namespace Trueque
 
                                                     
                                                     Console.WriteLine("Se agrego el objeto correctamente.\n");
+                                                    Console.Clear();
                                                     //realizar busqueda de coincidencias del objeto recien ingresado
                                                     string siNo = "";
                                                     while (siNo == "") { 
@@ -306,13 +308,47 @@ namespace Trueque
                                                             "1-Si \n"+
                                                             "2-No ");
                                                         siNo = Console.ReadLine();
+                                                        Console.Clear();
                                                         if (siNo == "1" | siNo == "2") {
                                                             switch (siNo) {
                                                                 case "1":
                                                                     //se deben buscar si existen coincidencias del objeto recien ingresado
+                                                                    string descripcion = obj.Descripcion;
+                                                                    string preferencia1 = obj.Preferencia1;
+                                                                    string preferencia2 = obj.Preferencia2;
+                                                                    string preferencia3 = obj.Preferencia3;
+                                                                    Console.WriteLine("Resultados de busqueda:\n ");
+                                                                    List<Objeto> perfectMatch = PerfectMatch(preferencia1, descripcion);
+                                                                    List<Objeto> secondaryMatch = SecondaryMatch(preferencia2, descripcion);
+                                                                    List<Objeto> thirdMatch = ThirdMatch(preferencia3, descripcion);
+                                                                    List<Objeto> listMatch = ListMatch(descripcion);
+                                                                    Console.WriteLine("Objetos que coinciden al 100% con su objeto y su primera preferencia: \n");
+                                                                    Console.ForegroundColor = ConsoleColor.Green;
+                                                                    foreach (Objeto ob in perfectMatch) {
+                                                                        Console.WriteLine("ID: " + ob.Id + "\n" + " Descripcion: " + ob.Descripcion + "\n" + " Nombre Propietario: " + ob.NombrePropietario + "\n" + " Valor aprox. Objeto: " + ob.Valor + "\n" + "Preferencia 1: " + ob.Preferencia1 + "\n" + " Preferencia 2: " + ob.Preferencia2 + "\n" + " Preferencia 3: " + ob.Preferencia3+ "\n");
+                                                                    }
+                                                                    Console.ForegroundColor = ConsoleColor.White;
+                                                                    Console.WriteLine("Objetos que coinciden al 100% con su objeto y su segunda preferencia: \n");
+                                                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                                                    foreach (Objeto ob in secondaryMatch) {
+                                                                        Console.WriteLine("ID: " + ob.Id + "\n" + " Descripcion: " + ob.Descripcion + "\n" + " Nombre Propietario: " + ob.NombrePropietario + "\n" + " Valor aprox. Objeto: " + ob.Valor + "\n" + "Preferencia 1: " + ob.Preferencia1 + "\n" + " Preferencia 2: " + ob.Preferencia2 + "\n" + " Preferencia 3: " + ob.Preferencia3+"\n");
+                                                                    }
+                                                                    Console.ForegroundColor = ConsoleColor.White;
+                                                                    Console.WriteLine("Objetos que coinciden al 100% con su objeto y su tercera preferencia: \n");
+                                                                    Console.ForegroundColor = ConsoleColor.Red;
+                                                                    foreach (Objeto ob in thirdMatch) {
+                                                                        Console.WriteLine("ID: " + ob.Id + "\n" + " Descripcion: " + ob.Descripcion + "\n" + " Nombre Propietario: " + ob.NombrePropietario + "\n" + " Valor aprox. Objeto: " + ob.Valor + "\n" + "Preferencia 1: " + ob.Preferencia1 + "\n" + " Preferencia 2: " + ob.Preferencia2 + "\n" + " Preferencia 3: " + ob.Preferencia3+ "\n" );
+                                                                    }
+                                                                    Console.ForegroundColor = ConsoleColor.White;
+                                                                    Console.WriteLine("Todos los objetos que cumplen con sus preferencias: \n");
+                                                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                                                    foreach (Objeto ob in listMatch) {
+                                                                        Console.WriteLine("ID: " + ob.Id + "\n"+"Descripcion: " + ob.Descripcion + "\n" + " Nombre Propietario: " + ob.NombrePropietario + "\n" + " Valor aprox. Objeto: " + ob.Valor + "\n" + "Preferencia 1: " + ob.Preferencia1 + "\n" + " Preferencia 2: " + ob.Preferencia2 + "\n" + " Preferencia 3: " + ob.Preferencia3+ "\n" );
+                                                                    }
+                                                                    Console.ForegroundColor = ConsoleColor.White;
                                                                     break;
                                                                 case "2":
-
+                                                                    Console.Clear();
                                                                     break;
                                                             
                                                             }
