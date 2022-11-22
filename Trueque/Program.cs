@@ -317,8 +317,6 @@ namespace Trueque
                                                             }
                                                         }
                                                     }
-                                                    
-
                                                     agregar = true;
                                                     break;
                                                 case "2":
@@ -383,7 +381,7 @@ namespace Trueque
             }
             return obj;
         }
-        public static Objeto BuscarPref3(string pref3, string desc) {
+        public static Objeto ThirdMatch(string pref3, string desc) {
             Objeto obj = new Objeto();
             List<Objeto> prefObj = (from prefTres in losObjetos
                                     where prefTres.Descripcion == pref3 && prefTres.Preferencia3 == desc
