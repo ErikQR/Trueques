@@ -17,7 +17,7 @@ namespace Trueque
         static void Main(string[] args) {
 
             LeerObjetos();
-            //LeerObjetosNoDisp();
+            LeerObjetosNoDisp();
             
             //GuardarListaObjetosNoDisp();
 
@@ -391,11 +391,36 @@ namespace Trueque
                                 where id.Id == ids
                                 select id).ToList();
             foreach (Objeto id in idObjs) {
-                Console.WriteLine("ID: "+id.Id+" Descripcion: "+id.Descripcion+" Nombre Propietario: "+id.NombrePropietario+" Valor aprox. Objeto: "+id.Valor);
                 obj = id;
             }          
             return obj;
         }
+        public static Objeto BuscarObjNoDisp(int ids) {
+            Objeto obj = new Objeto();
+            List<Objeto> objs = (from o in objetosNoDisp
+                                   where o.Id == ids
+                                   select o).ToList();
+            foreach (Objeto o in objs) {
+                obj = o;
+            }
+            return obj;
+        }
+        public static List<Objeto> BuscarObj(string txt) {
+            Objeto obj = new Objeto();
+            List<Objeto> objs = (from o in losObjetos
+                                where o.Descripcion.Contains(txt)
+                                select o).ToList();
+                    
+            return objs;
+        }
+        public static List<Objeto> BuscarObjNoDisp(string txt) {
+            Objeto obj = new Objeto();
+            List<Objeto> objs = (from o in objetosNoDisp
+                                   where (o.Descripcion.Contains(txt))
+                                   select o).ToList();
+            return objs;
+        }
+
         public static List<Objeto> PerfectMatch(string pref1, string desc) {
             Objeto obj = new Objeto();
             List<Objeto> prefObj = (from prefUno in losObjetos
@@ -459,26 +484,91 @@ namespace Trueque
                 Console.WriteLine(MenuBuscar);
                 opc= Console.ReadLine();
                 if(opc=="1" | opc=="2" | opc=="3"){
+                    Console.Clear();
                     Boolean num = false;
-                    //TODO: agregar métodos
                     if (opc == "1") {
                         Console.WriteLine("Ingrese texto o id a buscar:");
-
-
-
+                        string txtBsc = Console.ReadLine();
+                        int id;
+                        num = int.TryParse(txtBsc, out id);
+                        if (num) {
+                            Console.Clear();
+                            id = Int32.Parse(txtBsc);
+                            Objeto obj = BuscarObj(id);
+                            if (obj.Id != id) {
+                                MostrarMensajeError("No existe el id indicado en los registros. Presione cualquier tecla para continuar.");
+                            } else {
+                                MostrarObjeto(obj);
+                                num = false;
+                            }
+                        } else {
+                            List<Objeto> lstObjEnc = BuscarObj(txtBsc);
+                            MostrarObjeto(lstObjEnc);
+                        }
+                    }
+                    if (opc == "2") {
+                        Console.WriteLine("Ingrese texto o id a buscar:");
+                        string txtBsc = Console.ReadLine();
+                        int id;
+                        num = int.TryParse(txtBsc, out id);
+                        if (num) {
+                            Console.Clear();
+                            id = Int32.Parse(txtBsc);
+                            Objeto obj = BuscarObjNoDisp(id);
+                            if (obj.Id != id) {
+                                MostrarMensajeError("No existe el id indicado en los registros. Presione cualquier tecla para continuar.");
+                            } else {
+                                MostrarObjeto(obj);
+                                num = false;
+                            }
+                        } else {
+                            List<Objeto> lstObjEnc = BuscarObjNoDisp(txtBsc);
+                            MostrarObjeto(lstObjEnc);
+                        }
                     }
 
                 } else {
-                    Console.Clear() ;
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("La opción indicada no existe, favor indicar una opción válida");
-                    Console.ReadKey();
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                    MostrarMensajeError("La opción indicada no existe, favor indicar una opción válida");
                 }
 
 
             }
         }
+        public static void MostrarMensajeError (string txt) {
+            Console.Clear() ;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(txt);
+            Console.ReadKey();
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+        }
+
+        public static void MostrarObjeto(Objeto obj) {
+            //TODO: Mejorar aspecto visual para mostrar objetos
+            Console.WriteLine("| ID \t| Descripcion \t| Nombre Propietario \t| Valor aprox. Objeto\t| Preferencia 1\t| Preferencia 2\t| Preferencia 3\t|");
+            Console.WriteLine("| "+obj.Id + "\t| " + obj.Descripcion + "\t| " + obj.NombrePropietario + "\t\t\t| " + obj.Valor + "\t\t| " + obj.Preferencia1 + "\t| " + obj.Preferencia2 + "\t| " + obj.Preferencia3 +"\t|");
+            Console.ReadKey();
+
+        }
+
+        public static void MostrarObjeto(List<Objeto> lstObj) {
+            //TODO: mejorar aspecto visual en consola
+            if(lstObj.Count!=0) {
+                foreach (Objeto obj in lstObj) {
+                    Console.WriteLine("| " + obj.Id + "\t| " + obj.Descripcion + "\t| " + obj.NombrePropietario + "\t\t\t| " + obj.Valor + "\t\t| " + obj.Preferencia1 + "\t| " + obj.Preferencia2 + "\t| " + obj.Preferencia3 + "\t|");
+                }
+                Console.ReadKey();
+            } else {
+                MostrarMensajeError("No se encontraron objetos. Presione cualquier tecla para continuar.");
+            }
+            
+
+        }
+
+
 
     }
+
+
+    
 }
