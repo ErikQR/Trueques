@@ -324,27 +324,43 @@ namespace Trueque
                                                                     List<Objeto> listMatch = ListMatch(preferencia1, preferencia2, preferencia3);
                                                                     Console.WriteLine("Objetos que coinciden al 100% con su objeto y su primera preferencia: \n");
                                                                     Console.ForegroundColor = ConsoleColor.Green;
+                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                                                                    Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", "ID", "Descripción", "Propietario", "Valor", "Preferencia 1", "Preferencia 2", "Preferencia3"));
+                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
                                                                     foreach (Objeto ob in perfectMatch) {
-                                                                        Console.WriteLine("ID: " + ob.Id + "\n" + " Descripcion: " + ob.Descripcion + "\n" + " Nombre Propietario: " + ob.NombrePropietario + "\n" + " Valor aprox. Objeto: " + ob.Valor + "\n" + "Preferencia 1: " + ob.Preferencia1 + "\n" + " Preferencia 2: " + ob.Preferencia2 + "\n" + " Preferencia 3: " + ob.Preferencia3+ "\n");
+                                                                        Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(ob.Id.ToString(), 6), CortarTexto(ob.Descripcion, 20), CortarTexto(ob.NombrePropietario, 15), CortarTexto(ob.Valor.ToString(), 8), CortarTexto(ob.Preferencia1, 20), CortarTexto(ob.Preferencia2, 20), CortarTexto(ob.Preferencia3, 20)));
                                                                     }
+                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
                                                                     Console.ForegroundColor = ConsoleColor.White;
                                                                     Console.WriteLine("Objetos que coinciden al 100% con su objeto y su segunda preferencia: \n");
                                                                     Console.ForegroundColor = ConsoleColor.Yellow;
+                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                                                                    Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", "ID", "Descripción", "Propietario", "Valor", "Preferencia 1", "Preferencia 2", "Preferencia3"));
+                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
                                                                     foreach (Objeto ob in secondaryMatch) {
-                                                                        Console.WriteLine("ID: " + ob.Id + "\n" + " Descripcion: " + ob.Descripcion + "\n" + " Nombre Propietario: " + ob.NombrePropietario + "\n" + " Valor aprox. Objeto: " + ob.Valor + "\n" + "Preferencia 1: " + ob.Preferencia1 + "\n" + " Preferencia 2: " + ob.Preferencia2 + "\n" + " Preferencia 3: " + ob.Preferencia3+"\n");
+                                                                        Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(ob.Id.ToString(), 6), CortarTexto(ob.Descripcion, 20), CortarTexto(ob.NombrePropietario, 15), CortarTexto(ob.Valor.ToString(), 8), CortarTexto(ob.Preferencia1, 20), CortarTexto(ob.Preferencia2, 20), CortarTexto(ob.Preferencia3, 20)));
                                                                     }
+                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
                                                                     Console.ForegroundColor = ConsoleColor.White;
                                                                     Console.WriteLine("Objetos que coinciden al 100% con su objeto y su tercera preferencia: \n");
                                                                     Console.ForegroundColor = ConsoleColor.Red;
+                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                                                                    Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", "ID", "Descripción", "Propietario", "Valor", "Preferencia 1", "Preferencia 2", "Preferencia3"));
+                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
                                                                     foreach (Objeto ob in thirdMatch) {
-                                                                        Console.WriteLine("ID: " + ob.Id + "\n" + " Descripcion: " + ob.Descripcion + "\n" + " Nombre Propietario: " + ob.NombrePropietario + "\n" + " Valor aprox. Objeto: " + ob.Valor + "\n" + "Preferencia 1: " + ob.Preferencia1 + "\n" + " Preferencia 2: " + ob.Preferencia2 + "\n" + " Preferencia 3: " + ob.Preferencia3+ "\n" );
+                                                                        Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(ob.Id.ToString(), 6), CortarTexto(ob.Descripcion, 20), CortarTexto(ob.NombrePropietario, 15), CortarTexto(ob.Valor.ToString(), 8), CortarTexto(ob.Preferencia1, 20), CortarTexto(ob.Preferencia2, 20), CortarTexto(ob.Preferencia3, 20)));
                                                                     }
+                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
                                                                     Console.ForegroundColor = ConsoleColor.White;
                                                                     Console.WriteLine("Todos los objetos que cumplen con sus preferencias: \n");
                                                                     Console.ForegroundColor = ConsoleColor.Blue;
+                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                                                                    Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", "ID", "Descripción", "Propietario", "Valor", "Preferencia 1", "Preferencia 2", "Preferencia3"));
+                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
                                                                     foreach (Objeto ob in listMatch) {
-                                                                        Console.WriteLine("ID: " + ob.Id + "\n"+"Descripcion: " + ob.Descripcion + "\n" + " Nombre Propietario: " + ob.NombrePropietario + "\n" + " Valor aprox. Objeto: " + ob.Valor + "\n" + "Preferencia 1: " + ob.Preferencia1 + "\n" + " Preferencia 2: " + ob.Preferencia2 + "\n" + " Preferencia 3: " + ob.Preferencia3+ "\n" );
+                                                                        Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(ob.Id.ToString(), 6), CortarTexto(ob.Descripcion, 20), CortarTexto(ob.NombrePropietario, 15), CortarTexto(ob.Valor.ToString(), 8), CortarTexto(ob.Preferencia1, 20), CortarTexto(ob.Preferencia2, 20), CortarTexto(ob.Preferencia3, 20)));
                                                                     }
+                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
                                                                     Console.ForegroundColor = ConsoleColor.White;
                                                                     break;
                                                                 case "2":
