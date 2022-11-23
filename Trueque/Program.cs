@@ -409,7 +409,7 @@ namespace Trueque
         public static List<Objeto> PerfectMatch(string pref1, string desc) {
             Objeto obj = new Objeto();
             List<Objeto> prefObj = (from prefUno in losObjetos
-                                    where prefUno.Descripcion == pref1 && prefUno.Preferencia1 == desc 
+                                    where prefUno.Descripcion == pref1 && (prefUno.Preferencia1 == desc || prefUno.Preferencia2 == desc || prefUno.Preferencia3 == desc)
                                     select prefUno).ToList();
             /*
             foreach (Objeto prefUno in prefObj) {
@@ -421,7 +421,7 @@ namespace Trueque
         public static List<Objeto> SecondaryMatch(string pref2, string desc) {
             Objeto obj = new Objeto();
             List<Objeto> prefObj = (from prefDos in losObjetos
-                                    where prefDos.Descripcion == pref2 && prefDos.Preferencia2 == desc
+                                    where prefDos.Descripcion == pref2 && (prefDos.Preferencia2 == desc || prefDos.Preferencia1 == desc || prefDos.Preferencia3 == desc)
                                     select prefDos).ToList();
             /*
             foreach (Objeto prefDos in prefObj) {
@@ -434,7 +434,7 @@ namespace Trueque
         public static List<Objeto> ThirdMatch(string pref3, string desc) {
             Objeto obj = new Objeto();
             List<Objeto> prefObj = (from prefTres in losObjetos
-                                    where prefTres.Descripcion == pref3 && prefTres.Preferencia3 == desc
+                                    where prefTres.Descripcion == pref3 && (prefTres.Preferencia3 == desc || prefTres.Preferencia1 == desc || prefTres.Preferencia2 == desc)
                                     select prefTres).ToList();
             /*
             foreach (Objeto prefTres in prefObj) {
