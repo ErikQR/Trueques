@@ -321,7 +321,7 @@ namespace Trueque
                                                                     List<Objeto> perfectMatch = PerfectMatch(preferencia1, descripcion);
                                                                     List<Objeto> secondaryMatch = SecondaryMatch(preferencia2, descripcion);
                                                                     List<Objeto> thirdMatch = ThirdMatch(preferencia3, descripcion);
-                                                                    List<Objeto> listMatch = ListMatch(descripcion);
+                                                                    List<Objeto> listMatch = ListMatch(preferencia1, preferencia2, preferencia3);
                                                                     Console.WriteLine("Objetos que coinciden al 100% con su objeto y su primera preferencia: \n");
                                                                     Console.ForegroundColor = ConsoleColor.Green;
                                                                     foreach (Objeto ob in perfectMatch) {
@@ -459,10 +459,10 @@ namespace Trueque
 
             return prefObj;
         }
-        public static List<Objeto> ListMatch(string desc) {
+        public static List<Objeto> ListMatch(string pref1, string pref2, string pref3) {
             Objeto obj = new Objeto();
             List<Objeto> descObj = (from descripcion in losObjetos
-                                    where descripcion.Preferencia1 == desc || descripcion.Preferencia2 == desc || descripcion.Preferencia3 == desc
+                                    where descripcion.Descripcion == pref1 || descripcion.Descripcion == pref2 || descripcion.Descripcion == pref3
                                     select descripcion).ToList();
             //ToDo eliminar ya que este foreach es solo para mostrar en consola
             /*
@@ -502,6 +502,7 @@ namespace Trueque
                                 num = false;
                             }
                         } else {
+                            Console.Clear();
                             List<Objeto> lstObjEnc = BuscarObj(txtBsc);
                             MostrarObjeto(lstObjEnc);
                         }
@@ -522,6 +523,7 @@ namespace Trueque
                                 num = false;
                             }
                         } else {
+                            Console.Clear();
                             List<Objeto> lstObjEnc = BuscarObjNoDisp(txtBsc);
                             MostrarObjeto(lstObjEnc);
                         }
@@ -544,24 +546,39 @@ namespace Trueque
         }
 
         public static void MostrarObjeto(Objeto obj) {
-            //TODO: Mejorar aspecto visual para mostrar objetos
-            Console.WriteLine("| ID \t| Descripcion \t| Nombre Propietario \t| Valor aprox. Objeto\t| Preferencia 1\t| Preferencia 2\t| Preferencia 3\t|");
-            Console.WriteLine("| "+obj.Id + "\t| " + obj.Descripcion + "\t| " + obj.NombrePropietario + "\t\t\t| " + obj.Valor + "\t\t| " + obj.Preferencia1 + "\t| " + obj.Preferencia2 + "\t| " + obj.Preferencia3 +"\t|");
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|","ID","Descripción","Propietario","Valor","Preferencia 1","Preferencia 2","Preferencia3"));
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(obj.Id.ToString(),6), CortarTexto(obj.Descripcion,20), CortarTexto(obj.NombrePropietario,15), CortarTexto(obj.Valor.ToString(),8), CortarTexto(obj.Preferencia1,20), CortarTexto(obj.Preferencia2,20), CortarTexto(obj.Preferencia3,20)));
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
             Console.ReadKey();
 
         }
 
         public static void MostrarObjeto(List<Objeto> lstObj) {
-            //TODO: mejorar aspecto visual en consola
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|","ID","Descripción","Propietario","Valor","Preferencia 1","Preferencia 2","Preferencia3"));
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
             if(lstObj.Count!=0) {
                 foreach (Objeto obj in lstObj) {
-                    Console.WriteLine("| " + obj.Id + "\t| " + obj.Descripcion + "\t| " + obj.NombrePropietario + "\t\t\t| " + obj.Valor + "\t\t| " + obj.Preferencia1 + "\t| " + obj.Preferencia2 + "\t| " + obj.Preferencia3 + "\t|");
+                    Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(obj.Id.ToString(),6), CortarTexto(obj.Descripcion,20), CortarTexto(obj.NombrePropietario,15), CortarTexto(obj.Valor.ToString(),8), CortarTexto(obj.Preferencia1,20), CortarTexto(obj.Preferencia2,20), CortarTexto(obj.Preferencia3,20)));
                 }
+                Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
                 Console.ReadKey();
             } else {
                 MostrarMensajeError("No se encontraron objetos. Presione cualquier tecla para continuar.");
+           
             }
-            
+        }
+
+        public static string CortarTexto(string txt, int ind) {
+            string txtC = "";
+            if(txt.Length > ind) { 
+                txtC = txt.Substring(0,ind);
+            } else {
+                txtC = txt;
+            }
+            return txtC;
 
         }
 
