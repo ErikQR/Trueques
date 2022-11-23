@@ -9,16 +9,14 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trueque
-{
-    internal class Program
-    {
-        
+namespace Trueque {
+    internal class Program {
+
         static void Main(string[] args) {
 
             LeerObjetos();
             LeerObjetosNoDisp();
-            
+
             //GuardarListaObjetosNoDisp();
 
             string Menu = "Bienvenido al sistema de gestion de trueques \n" +
@@ -30,7 +28,7 @@ namespace Trueque
             string opcion = "";
             while (opcion == "") {
                 Console.WriteLine(Menu);
-                opcion=Console.ReadLine();
+                opcion = Console.ReadLine();
                 if (opcion == "1" | opcion == "2" | opcion == "3" | opcion == "4") {
                     switch (opcion) {
                         case "1":
@@ -45,7 +43,7 @@ namespace Trueque
                             Buscar();
                             break;
                         case "3":
-                            
+
                             //Gestionar trueque(metodo)
                             //Esta opcion permite permutar 2 productos, en un inicio se debe buscar en la lista de objetos el 1er objeto a permutar
                             //luego de seleccionar el primer producto, se muestra en pantalla y permite buscar el 2do objeto a permutar,
@@ -54,17 +52,17 @@ namespace Trueque
                             //despues de guardar en la lista se deben eliminar los objetos seleccionados de la lista objetos
                             break;
                     }
-                        if (opcion == "1" | opcion == "2" | opcion == "3") {
+                    if (opcion == "1" | opcion == "2" | opcion == "3") {
                         opcion = "";
-                        } 
-                    } else {
+                    }
+                } else {
                     opcion = "";
                     Console.Clear();
                     Console.WriteLine("Opcion ingresada no valida, Reingrese una opcion valida");
-                    }
-            }  
-            
-            
+                }
+            }
+
+
         }
         //metodos
         private static List<Objeto> losObjetos = new List<Objeto>();
@@ -115,8 +113,8 @@ namespace Trueque
 
             try {
                 //Guardar lista losObjetos
-                foreach (Objeto obj in losObjetos) { 
-                    sw.WriteLine(obj.Id.ToString()+"|"+obj.Descripcion.ToString()+"|"+obj.NombrePropietario.ToString()+"|"+obj.Valor.ToString()+"|"+obj.Preferencia1.ToString()+"|"+ obj.Preferencia2.ToString()+"|"+ obj.Preferencia3.ToString()+"|"+obj.FechaIngreso.ToString());
+                foreach (Objeto obj in losObjetos) {
+                    sw.WriteLine(obj.Id.ToString() + "|" + obj.Descripcion.ToString() + "|" + obj.NombrePropietario.ToString() + "|" + obj.Valor.ToString() + "|" + obj.Preferencia1.ToString() + "|" + obj.Preferencia2.ToString() + "|" + obj.Preferencia3.ToString() + "|" + obj.FechaIngreso.ToString());
                 }
             } catch (Exception ex) {
                 Console.WriteLine("Error ->" + ex.ToString());
@@ -144,7 +142,7 @@ namespace Trueque
         }
         public static void AgregarObjeto() {
             Console.Clear();
-            Objeto obj=new Objeto();
+            Objeto obj = new Objeto();
             obj.FechaIngreso = DateTime.Today.ToString();
             bool agregar = false;
             bool cancelar = false;
@@ -288,17 +286,17 @@ namespace Trueque
                                                     losObjetos.Add(obj);
                                                     GuardarListaObjetos();
 
-                                                    
+
                                                     Console.WriteLine("Se agrego el objeto correctamente.\n");
                                                     Console.Clear();
                                                     //realizar busqueda de coincidencias del objeto recien ingresado
                                                     string siNo = "";
-                                                    while (siNo == "") { 
+                                                    while (siNo == "") {
                                                         Console.WriteLine(
-                                                            "\n"+
+                                                            "\n" +
                                                             "Desea buscar si existen objetos que coincidan con sus preferencias?" +
-                                                            "\n"+
-                                                            "1-Si \n"+
+                                                            "\n" +
+                                                            "1-Si \n" +
                                                             "2-No ");
                                                         siNo = Console.ReadLine();
                                                         Console.Clear();
@@ -335,7 +333,7 @@ namespace Trueque
                                                                 case "2":
                                                                     Console.Clear();
                                                                     break;
-                                                            
+
                                                             }
                                                         }
                                                     }
@@ -369,22 +367,22 @@ namespace Trueque
             Console.ReadKey();
             Console.Clear();
         }
-        
+
         public static Objeto BuscarObj(int ids) {
             Objeto obj = new Objeto();
             List<Objeto> idObjs = (from id in losObjetos
-                                where id.Id == ids
-                                select id).ToList();
+                                   where id.Id == ids
+                                   select id).ToList();
             foreach (Objeto id in idObjs) {
                 obj = id;
-            }          
+            }
             return obj;
         }
         public static Objeto BuscarObjNoDisp(int ids) {
             Objeto obj = new Objeto();
             List<Objeto> objs = (from o in objetosNoDisp
-                                   where o.Id == ids
-                                   select o).ToList();
+                                 where o.Id == ids
+                                 select o).ToList();
             foreach (Objeto o in objs) {
                 obj = o;
             }
@@ -393,16 +391,16 @@ namespace Trueque
         public static List<Objeto> BuscarObj(string txt) {
             Objeto obj = new Objeto();
             List<Objeto> objs = (from o in losObjetos
-                                where o.Descripcion.Contains(txt)
-                                select o).ToList();
-                    
+                                 where o.Descripcion.Contains(txt)
+                                 select o).ToList();
+
             return objs;
         }
         public static List<Objeto> BuscarObjNoDisp(string txt) {
             Objeto obj = new Objeto();
             List<Objeto> objs = (from o in objetosNoDisp
-                                   where (o.Descripcion.Contains(txt))
-                                   select o).ToList();
+                                 where (o.Descripcion.Contains(txt))
+                                 select o).ToList();
             return objs;
         }
 
@@ -464,11 +462,11 @@ namespace Trueque
                         "2 = Buscar objetos no disponibles \n" +
                         "3 = Salir \n";
             string opc = "";
-            while (opc!="3") {
+            while (opc != "3") {
                 Console.Clear();
                 Console.WriteLine(MenuBuscar);
-                opc= Console.ReadLine();
-                if(opc=="1" | opc=="2" | opc=="3"){
+                opc = Console.ReadLine();
+                if (opc == "1" | opc == "2" | opc == "3") {
                     Console.Clear();
                     Boolean num = false;
                     if (opc == "1") {
@@ -489,7 +487,7 @@ namespace Trueque
                         } else {
                             Console.Clear();
                             List<Objeto> lstObjEnc = BuscarObj(txtBsc);
-                            if(lstObjEnc.Count!=0) {
+                            if (lstObjEnc.Count != 0) {
                                 MostrarObjeto(lstObjEnc);
                                 Console.ReadKey();
                             } else {
@@ -516,14 +514,14 @@ namespace Trueque
                         } else {
                             Console.Clear();
                             List<Objeto> lstObjEnc = BuscarObjNoDisp(txtBsc);
-                            if(lstObjEnc.Count!=0) {
+                            if (lstObjEnc.Count != 0) {
                                 MostrarObjeto(lstObjEnc);
                                 Console.ReadKey();
                             } else {
                                 MostrarMensajeError("No se encontraron objetos. Presione cualquier tecla para continuar.");
                                 Console.ReadKey();
                             }
-                            
+
                         }
                     }
 
@@ -534,8 +532,8 @@ namespace Trueque
 
             }
         }
-        public static void MostrarMensajeError (string txt) {
-            Console.Clear() ;
+        public static void MostrarMensajeError(string txt) {
+            Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(txt);
             Console.ReadKey();
@@ -545,9 +543,9 @@ namespace Trueque
 
         public static void MostrarObjeto(Objeto obj) {
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|","ID","Descripción","Propietario","Valor","Preferencia 1","Preferencia 2","Preferencia3"));
+            Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", "ID", "Descripción", "Propietario", "Valor", "Preferencia 1", "Preferencia 2", "Preferencia3"));
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(obj.Id.ToString(),6), CortarTexto(obj.Descripcion,20), CortarTexto(obj.NombrePropietario,15), CortarTexto(obj.Valor.ToString(),8), CortarTexto(obj.Preferencia1,20), CortarTexto(obj.Preferencia2,20), CortarTexto(obj.Preferencia3,20)));
+            Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(obj.Id.ToString(), 6), CortarTexto(obj.Descripcion, 20), CortarTexto(obj.NombrePropietario, 15), CortarTexto(obj.Valor.ToString(), 8), CortarTexto(obj.Preferencia1, 20), CortarTexto(obj.Preferencia2, 20), CortarTexto(obj.Preferencia3, 20)));
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
             Console.ReadKey();
 
@@ -555,30 +553,96 @@ namespace Trueque
 
         public static void MostrarObjeto(List<Objeto> lstObj) {
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|","ID","Descripción","Propietario","Valor","Preferencia 1","Preferencia 2","Preferencia3"));
+            Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", "ID", "Descripción", "Propietario", "Valor", "Preferencia 1", "Preferencia 2", "Preferencia3"));
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
             foreach (Objeto obj in lstObj) {
-                Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(obj.Id.ToString(),6), CortarTexto(obj.Descripcion,20), CortarTexto(obj.NombrePropietario,15), CortarTexto(obj.Valor.ToString(),8), CortarTexto(obj.Preferencia1,20), CortarTexto(obj.Preferencia2,20), CortarTexto(obj.Preferencia3,20)));
+                Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(obj.Id.ToString(), 6), CortarTexto(obj.Descripcion, 20), CortarTexto(obj.NombrePropietario, 15), CortarTexto(obj.Valor.ToString(), 8), CortarTexto(obj.Preferencia1, 20), CortarTexto(obj.Preferencia2, 20), CortarTexto(obj.Preferencia3, 20)));
             }
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-                
+
         }
 
         public static string CortarTexto(string txt, int ind) {
             string txtC = "";
-            if(txt.Length > ind) { 
-                txtC = txt.Substring(0,ind);
+            if (txt.Length > ind) {
+                txtC = txt.Substring(0, ind);
             } else {
                 txtC = txt;
             }
             return txtC;
 
         }
+        public static void GestionarTrueque() {
+            Console.Clear();
+            Objeto objeto1 = new Objeto();
+            Objeto objeto2 = new Objeto();
+            bool permutar = false;
+            bool cancelar = false;            
+            string opc = "";
+            while (!permutar && !cancelar) {
+                string menu = "Seleccione los objetos que desea buscar para realizar el trueque: \n" +
+                        "\n" +
+                        "-1 Primer objeto \n" +
+                        "-2 Segundo objeto \n" +
+                        "-3 Realizar trueque \n" +
+                        "-4 Cancelar trueque ";
+                Console.WriteLine(menu);
+                opc = Console.ReadLine();
+                Console.Clear();
+                if (opc == "1|" | opc == "2" | opc == "3" | opc == "4") {
+                    switch (opc) {
+                        case "1":
+                            bool num = false;
+                            while (!num) {
+                                int id;
+                                Console.WriteLine("Ingrese id del objeto que desea permutar");
+                                string ids = Console.ReadLine();
+                                num = int.TryParse(ids, out id);
+                                if (num) {
+                                    Console.Clear();
+                                    id = Int32.Parse(ids);
+                                    Objeto ob = BuscarObj(id);
+                                    if (ob.Id == id) {
+                                        Console.WriteLine("Resultado de la busqueda: \n ");
+                                        objeto1 = ob;
+                                        Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                                        Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", "ID", "Descripción", "Propietario", "Valor", "Preferencia 1", "Preferencia 2", "Preferencia3"));
+                                        Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                                        Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(objeto1.Id.ToString(), 6), CortarTexto(objeto1.Descripcion, 20), CortarTexto(objeto1.NombrePropietario, 15), CortarTexto(objeto1.Valor.ToString(), 8), CortarTexto(objeto1.Preferencia1, 20), CortarTexto(objeto1.Preferencia2, 20), CortarTexto(objeto1.Preferencia3, 20)));
+                                        Console.WriteLine("--------------------------------------------------------------------------------------------------------------------- \n");
+                                        Console.WriteLine("Presione cualquier tecla para continuar");
+                                        num = true;
+                                    } else {
+                                        MostrarMensajeError("No existe el id indicado en los registros. Presione cualquier tecla para continuar.");
+                                        num = true;
+                                    }
+                                } else {
+                                    MostrarMensajeError("Ingrese solo numeros");
+                                }
+                            }
+                            break;
+                        case "2":
+                            //TO-DO  : buscar 2do objeto y almacenarlo en objeto 2
+                            break;
+                        case "3":
+                            //TO-DO : guardar los 2 objetos concatenados en un string, el cual debe ser guardado en la lista historica
+                            // luego de guardar los objetos en la lista, eliminar ambos objetos en la lista de objetosdisponibles
+                            break;
+                        case "4":
+                            //Cancelar la operacion
+                            break;
+                    }
 
+
+                }
+            }
+
+
+        }
 
 
     }
 
 
-    
+
 }
