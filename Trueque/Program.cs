@@ -321,7 +321,7 @@ namespace Trueque
                                                                     List<Objeto> perfectMatch = PerfectMatch(preferencia1, descripcion);
                                                                     List<Objeto> secondaryMatch = SecondaryMatch(preferencia2, descripcion);
                                                                     List<Objeto> thirdMatch = ThirdMatch(preferencia3, descripcion);
-                                                                    List<Objeto> listMatch = ListMatch(descripcion);
+                                                                    List<Objeto> listMatch = ListMatch(preferencia1, preferencia2, preferencia3);
                                                                     Console.WriteLine("Objetos que coinciden al 100% con su objeto y su primera preferencia: \n");
                                                                     Console.ForegroundColor = ConsoleColor.Green;
                                                                     foreach (Objeto ob in perfectMatch) {
@@ -459,10 +459,10 @@ namespace Trueque
 
             return prefObj;
         }
-        public static List<Objeto> ListMatch(string desc) {
+        public static List<Objeto> ListMatch(string pref1, string pref2, string pref3) {
             Objeto obj = new Objeto();
             List<Objeto> descObj = (from descripcion in losObjetos
-                                    where descripcion.Preferencia1 == desc || descripcion.Preferencia2 == desc || descripcion.Preferencia3 == desc
+                                    where descripcion.Descripcion == pref1 || descripcion.Descripcion == pref2 || descripcion.Descripcion == pref3
                                     select descripcion).ToList();
             //ToDo eliminar ya que este foreach es solo para mostrar en consola
             /*
