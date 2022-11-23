@@ -43,13 +43,6 @@ namespace Trueque
                             break;
                         case "2":
                             Buscar();
-                            //Consultar objetos
-                            // -1
-                            //  -1.1 buscar objetos por nombre y/o id
-                            //  -1.2 desplegar lista de objetos desde el mas antiguo
-                            // -2 articulos no disponibles
-                            //  -2.1 desplegar lista de objetos no disponibles con informcion del cliente
-                            //  -2.2 buscar objetos no disp. por nombre cliente o id
                             break;
                         case "3":
                             
@@ -324,43 +317,19 @@ namespace Trueque
                                                                     List<Objeto> listMatch = ListMatch(preferencia1, preferencia2, preferencia3);
                                                                     Console.WriteLine("Objetos que coinciden al 100% con su objeto y su primera preferencia: \n");
                                                                     Console.ForegroundColor = ConsoleColor.Green;
-                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-                                                                    Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", "ID", "Descripción", "Propietario", "Valor", "Preferencia 1", "Preferencia 2", "Preferencia3"));
-                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-                                                                    foreach (Objeto ob in perfectMatch) {
-                                                                        Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(ob.Id.ToString(), 6), CortarTexto(ob.Descripcion, 20), CortarTexto(ob.NombrePropietario, 15), CortarTexto(ob.Valor.ToString(), 8), CortarTexto(ob.Preferencia1, 20), CortarTexto(ob.Preferencia2, 20), CortarTexto(ob.Preferencia3, 20)));
-                                                                    }
-                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                                                                    MostrarObjeto(perfectMatch);
                                                                     Console.ForegroundColor = ConsoleColor.White;
                                                                     Console.WriteLine("Objetos que coinciden al 100% con su objeto y su segunda preferencia: \n");
                                                                     Console.ForegroundColor = ConsoleColor.Yellow;
-                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-                                                                    Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", "ID", "Descripción", "Propietario", "Valor", "Preferencia 1", "Preferencia 2", "Preferencia3"));
-                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-                                                                    foreach (Objeto ob in secondaryMatch) {
-                                                                        Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(ob.Id.ToString(), 6), CortarTexto(ob.Descripcion, 20), CortarTexto(ob.NombrePropietario, 15), CortarTexto(ob.Valor.ToString(), 8), CortarTexto(ob.Preferencia1, 20), CortarTexto(ob.Preferencia2, 20), CortarTexto(ob.Preferencia3, 20)));
-                                                                    }
-                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                                                                    MostrarObjeto(secondaryMatch);
                                                                     Console.ForegroundColor = ConsoleColor.White;
                                                                     Console.WriteLine("Objetos que coinciden al 100% con su objeto y su tercera preferencia: \n");
                                                                     Console.ForegroundColor = ConsoleColor.Red;
-                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-                                                                    Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", "ID", "Descripción", "Propietario", "Valor", "Preferencia 1", "Preferencia 2", "Preferencia3"));
-                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-                                                                    foreach (Objeto ob in thirdMatch) {
-                                                                        Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(ob.Id.ToString(), 6), CortarTexto(ob.Descripcion, 20), CortarTexto(ob.NombrePropietario, 15), CortarTexto(ob.Valor.ToString(), 8), CortarTexto(ob.Preferencia1, 20), CortarTexto(ob.Preferencia2, 20), CortarTexto(ob.Preferencia3, 20)));
-                                                                    }
-                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                                                                    MostrarObjeto(thirdMatch);
                                                                     Console.ForegroundColor = ConsoleColor.White;
                                                                     Console.WriteLine("Todos los objetos que cumplen con sus preferencias: \n");
                                                                     Console.ForegroundColor = ConsoleColor.Blue;
-                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-                                                                    Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", "ID", "Descripción", "Propietario", "Valor", "Preferencia 1", "Preferencia 2", "Preferencia3"));
-                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-                                                                    foreach (Objeto ob in listMatch) {
-                                                                        Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(ob.Id.ToString(), 6), CortarTexto(ob.Descripcion, 20), CortarTexto(ob.NombrePropietario, 15), CortarTexto(ob.Valor.ToString(), 8), CortarTexto(ob.Preferencia1, 20), CortarTexto(ob.Preferencia2, 20), CortarTexto(ob.Preferencia3, 20)));
-                                                                    }
-                                                                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                                                                    MostrarObjeto(listMatch);
                                                                     Console.ForegroundColor = ConsoleColor.White;
                                                                     break;
                                                                 case "2":
@@ -520,7 +489,13 @@ namespace Trueque
                         } else {
                             Console.Clear();
                             List<Objeto> lstObjEnc = BuscarObj(txtBsc);
-                            MostrarObjeto(lstObjEnc);
+                            if(lstObjEnc.Count!=0) {
+                                MostrarObjeto(lstObjEnc);
+                                Console.ReadKey();
+                            } else {
+                                MostrarMensajeError("No se encontraron objetos. Presione cualquier tecla para continuar.");
+                                Console.ReadKey();
+                            }
                         }
                     }
                     if (opc == "2") {
@@ -541,7 +516,14 @@ namespace Trueque
                         } else {
                             Console.Clear();
                             List<Objeto> lstObjEnc = BuscarObjNoDisp(txtBsc);
-                            MostrarObjeto(lstObjEnc);
+                            if(lstObjEnc.Count!=0) {
+                                MostrarObjeto(lstObjEnc);
+                                Console.ReadKey();
+                            } else {
+                                MostrarMensajeError("No se encontraron objetos. Presione cualquier tecla para continuar.");
+                                Console.ReadKey();
+                            }
+                            
                         }
                     }
 
@@ -575,16 +557,11 @@ namespace Trueque
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|","ID","Descripción","Propietario","Valor","Preferencia 1","Preferencia 2","Preferencia3"));
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-            if(lstObj.Count!=0) {
-                foreach (Objeto obj in lstObj) {
-                    Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(obj.Id.ToString(),6), CortarTexto(obj.Descripcion,20), CortarTexto(obj.NombrePropietario,15), CortarTexto(obj.Valor.ToString(),8), CortarTexto(obj.Preferencia1,20), CortarTexto(obj.Preferencia2,20), CortarTexto(obj.Preferencia3,20)));
-                }
-                Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-                Console.ReadKey();
-            } else {
-                MostrarMensajeError("No se encontraron objetos. Presione cualquier tecla para continuar.");
-           
+            foreach (Objeto obj in lstObj) {
+                Console.WriteLine(String.Format("|{0,6}|{1,20}|{2,15}|{3,8}|{4,20}|{5,20}|{6,20}|", CortarTexto(obj.Id.ToString(),6), CortarTexto(obj.Descripcion,20), CortarTexto(obj.NombrePropietario,15), CortarTexto(obj.Valor.ToString(),8), CortarTexto(obj.Preferencia1,20), CortarTexto(obj.Preferencia2,20), CortarTexto(obj.Preferencia3,20)));
             }
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                
         }
 
         public static string CortarTexto(string txt, int ind) {
