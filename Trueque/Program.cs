@@ -22,7 +22,6 @@ namespace Trueque {
             GuardarListaObjetosNoDisp();
             GuardarHistorico();
 
-            //GuardarListaObjetosNoDisp();
 
             string Menu = "Bienvenido al sistema de gestion de trueques \n" +
                         "1- Agregar Objetos \n" +
@@ -38,23 +37,13 @@ namespace Trueque {
                     switch (opcion) {
                         case "1":
                             AgregarObjeto();
-                            //Se agrega el objeto
-                            //se buscan preferencias
-                            //si hay match se despliega el objeto en pantalla
-                            //se consulta si desea realizar el cambio
-                            //se realiza el cambio de objetos, guardando el trueque en el hitorico y eliminacion de ambos objetos en la lista objetos
                             break;
                         case "2":
                             Buscar();
                             break;
                         case "3":
                             GestionarTrueque();
-                            //Gestionar trueque(metodo)
-                            //Esta opcion permite permutar 2 productos, en un inicio se debe buscar en la lista de objetos el 1er objeto a permutar
-                            //luego de seleccionar el primer producto, se muestra en pantalla y permite buscar el 2do objeto a permutar,
-                            //cuando esten los 2 productos seleccionados se muestra en pantalla si desea realizar el cambio
-                            //al realizar el cambio hay que guardar los objetos como strings en una lista que se debe llamar trueques
-                            //despues de guardar en la lista se deben eliminar los objetos seleccionados de la lista objetos
+                      
                             break;
                     }
                     if (opcion == "1" | opcion == "2" | opcion == "3") {
@@ -375,15 +364,15 @@ namespace Trueque {
                                                                     List<Objeto> secondaryMatch = SecondaryMatch(preferencia2, descripcion);
                                                                     List<Objeto> thirdMatch = ThirdMatch(preferencia3, descripcion);
                                                                     List<Objeto> listMatch = ListMatch(preferencia1, preferencia2, preferencia3);
-                                                                    Console.WriteLine("Objetos que coinciden al 100% con su objeto y su primera preferencia: \n");
+                                                                    Console.WriteLine("Objetos que coincide con su objeto y su primera preferencia: \n");
                                                                     Console.ForegroundColor = ConsoleColor.Green;
                                                                     MostrarObjeto(perfectMatch);
                                                                     Console.ForegroundColor = ConsoleColor.White;
-                                                                    Console.WriteLine("Objetos que coinciden al 100% con su objeto y su segunda preferencia: \n");
+                                                                    Console.WriteLine("Objetos que coinciden con su objeto y su segunda preferencia: \n");
                                                                     Console.ForegroundColor = ConsoleColor.Yellow;
                                                                     MostrarObjeto(secondaryMatch);
                                                                     Console.ForegroundColor = ConsoleColor.White;
-                                                                    Console.WriteLine("Objetos que coinciden al 100% con su objeto y su tercera preferencia: \n");
+                                                                    Console.WriteLine("Objetos que coinciden con su objeto y su tercera preferencia: \n");
                                                                     Console.ForegroundColor = ConsoleColor.Red;
                                                                     MostrarObjeto(thirdMatch);
                                                                     Console.ForegroundColor = ConsoleColor.White;
@@ -402,7 +391,7 @@ namespace Trueque {
                                                     while (siNo2 == "") {
                                                         Console.WriteLine(
                                                             "\n" +
-                                                            "Desea realizar un trueue de inmediato?" +
+                                                            "Desea realizar un trueque de inmediato?" +
                                                             "\n" +
                                                             "1-Si \n" +
                                                             "2-No ");
@@ -492,11 +481,7 @@ namespace Trueque {
             List<Objeto> prefObj = (from prefUno in losObjetos
                                     where prefUno.Descripcion == pref1 && (prefUno.Preferencia1 == desc || prefUno.Preferencia2 == desc || prefUno.Preferencia3 == desc)
                                     select prefUno).ToList();
-            /*
-            foreach (Objeto prefUno in prefObj) {
-                Console.WriteLine("ID: " + prefUno.Id + " Descripcion: " + prefUno.Descripcion + " Nombre Propietario: " + prefUno.NombrePropietario + " Valor aprox. Objeto: " + prefUno.Valor + "Preferencia 1: " + prefUno.Preferencia1 + " Preferencia 2: " + prefUno.Preferencia2 + " Preferencia 3: " + prefUno.Preferencia3 );
-                obj = prefUno;
-            }*/
+           
             return prefObj;
         }
         public static List<Objeto> SecondaryMatch(string pref2, string desc) {
@@ -504,11 +489,7 @@ namespace Trueque {
             List<Objeto> prefObj = (from prefDos in losObjetos
                                     where prefDos.Descripcion == pref2 && (prefDos.Preferencia2 == desc || prefDos.Preferencia1 == desc || prefDos.Preferencia3 == desc)
                                     select prefDos).ToList();
-            /*
-            foreach (Objeto prefDos in prefObj) {
-                Console.WriteLine("ID: " + prefDos.Id + " Descripcion: " + prefDos.Descripcion + " Nombre Propietario: " + prefDos.NombrePropietario + " Valor aprox. Objeto: " + prefDos.Valor + "Preferencia 1: " + prefDos.Preferencia1 + " Preferencia 2: " + prefDos.Preferencia2 + " Preferencia 3: " + prefDos.Preferencia3);
-                obj = prefDos;
-            }*/
+           
 
             return prefObj;
         }
@@ -517,11 +498,7 @@ namespace Trueque {
             List<Objeto> prefObj = (from prefTres in losObjetos
                                     where prefTres.Descripcion == pref3 && (prefTres.Preferencia3 == desc || prefTres.Preferencia1 == desc || prefTres.Preferencia2 == desc)
                                     select prefTres).ToList();
-            /*
-            foreach (Objeto prefTres in prefObj) {
-                Console.WriteLine("ID: " + prefTres.Id + " Descripcion: " + prefTres.Descripcion + " Nombre Propietario: " + prefTres.NombrePropietario + " Valor aprox. Objeto: " + prefTres.Valor + "Preferencia 1: " + prefTres.Preferencia1 + " Preferencia 2: " + prefTres.Preferencia2 + " Preferencia 3: " + prefTres.Preferencia3);
-                obj = prefTres;
-            }*/
+     
 
             return prefObj;
         }
@@ -530,12 +507,7 @@ namespace Trueque {
             List<Objeto> descObj = (from descripcion in losObjetos
                                     where descripcion.Descripcion == pref1 || descripcion.Descripcion == pref2 || descripcion.Descripcion == pref3
                                     select descripcion).ToList();
-            //ToDo eliminar ya que este foreach es solo para mostrar en consola
-            /*
-            foreach (Objeto descripcion in descObj) {
-                Console.WriteLine("ID: " + descripcion.Id + " Descripcion: " + descripcion.Descripcion + " Nombre Propietario: " + descripcion.NombrePropietario + " Valor aprox. Objeto: " + descripcion.Valor + "Preferencia 1: " + descripcion.Preferencia1 + " Preferencia 2: " + descripcion.Preferencia2 + " Preferencia 3: " + descripcion.Preferencia3);
-                obj = descripcion;
-            }*/
+          
             return descObj;
         }
 
