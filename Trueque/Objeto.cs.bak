@@ -26,12 +26,13 @@ namespace Trueque {
         public string Preferencia1 { get; set; }
         public string Preferencia2 { get; set; }
         public string Preferencia3 { get; set; }
+        public string FechaIngreso { get; set; }
 
         //Contructor
         public Objeto() { 
         
         }
-        public Objeto(int id, string descripcion,string nombrepropietario, int valor, string preferencia1, string preferencia2, string preferencia3,DateTime fechaingreso) {
+        public Objeto(int id, string descripcion,string nombrepropietario, int valor, string preferencia1, string preferencia2, string preferencia3,string fechaingreso) {
             Id = id;
             Descripcion = descripcion;
             NombrePropietario = nombrepropietario;
@@ -39,7 +40,16 @@ namespace Trueque {
             Preferencia1 = preferencia1;
             Preferencia2 = preferencia2;
             Preferencia3 = preferencia3;
-            Fecha = fechaingreso;
+            FechaIngreso = fechaingreso;
+        }
+        //Metodos
+        public void ObtenerFechaIngreso() {
+            try {
+                Fecha = DateTime.ParseExact(FechaIngreso, "dd/MM/yyyy", null);
+            } catch (Exception e){
+                Console.WriteLine("Fecha ingresada invalida! \n" + e);
+                return;
+            }
         }
         
 

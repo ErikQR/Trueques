@@ -140,8 +140,9 @@ namespace Trueque {
             try
             {
                 //Guardar lista losObjetos
-                foreach (Objeto obj in losObjetos) {
-                    sw.WriteLine(obj.Id.ToString() + "|" + obj.Descripcion.ToString() + "|" + obj.NombrePropietario.ToString() + "|" + obj.Valor.ToString() + "|" + obj.Preferencia1.ToString() + "|" + obj.Preferencia2.ToString() + "|" + obj.Preferencia3.ToString() + "|" + obj.Fecha.ToString("d"));
+                foreach (Objeto obj in losObjetos)
+                {
+                    sw.WriteLine(obj.Id.ToString() + "|" + obj.Descripcion.ToString() + "|" + obj.NombrePropietario.ToString() + "|" + obj.Valor.ToString() + "|" + obj.Preferencia1.ToString() + "|" + obj.Preferencia2.ToString() + "|" + obj.Preferencia3.ToString() + "|" + obj.FechaIngreso.ToString());
                 }
             }
             catch (Exception ex)
@@ -163,8 +164,9 @@ namespace Trueque {
             try
             {
                 //Guardar lista losObjetos
-                foreach (Objeto obj in objetosNoDisp) {
-                    sw.WriteLine(obj.Id.ToString() + "|" + obj.Descripcion.ToString() + "|" + obj.NombrePropietario.ToString() + "|" + obj.Valor.ToString() + "|" + obj.Preferencia1.ToString() + "|" + obj.Preferencia2.ToString() + "|" + obj.Preferencia3.ToString() + "|" + obj.Fecha.ToString("d"));
+                foreach (Objeto obj in objetosNoDisp)
+                {
+                    sw.WriteLine(obj.Id.ToString() + "|" + obj.Descripcion.ToString() + "|" + obj.NombrePropietario.ToString() + "|" + obj.Valor.ToString() + "|" + obj.Preferencia1.ToString() + "|" + obj.Preferencia2.ToString() + "|" + obj.Preferencia3.ToString() + "|" + obj.FechaIngreso.ToString());
                 }
             }
             catch (Exception ex)
