@@ -522,13 +522,14 @@ namespace Trueque {
                         "1 = Buscar objetos disponibles \n" +
                         "2 = Buscar objetos no disponibles \n" +
                         "3 = Listar objetos disponibles por tiempo de antiguedad \n" +
-                        "4 = Salir \n";
+                        "4 = Valorizar objetos \n" +
+                        "5 = Salir \n";
             string opc = "";
-            while (opc != "4") {
+            while (opc != "5") {
                 Console.Clear();
                 Console.WriteLine(MenuBuscar);
                 opc = Console.ReadLine();
-                if (opc == "1" | opc == "2" | opc == "3" | opc == "4") {
+                if (opc == "1" | opc == "2" | opc == "3" | opc == "4"| opc=="5") {
                     Console.Clear();
                     Boolean num = false;
                     if (opc == "1") {
@@ -616,7 +617,14 @@ namespace Trueque {
                                                              orderby o.Fecha ascending
                                                              select o).ToList();
                                         Console.ForegroundColor = ConsoleColor.Blue;
-                                        MostrarObjeto(objs);
+                                        Console.WriteLine(("").PadLeft(108,'-'));
+                                        Console.WriteLine(String.Format("|{0,6}|{1,15}|{2,15}|{3,8}|{4,15}|{5,15}|{6,15}|{7,10}|", "ID", "Descripción", "Propietario", "Valor", "Preferencia 1", "Preferencia 2", "Preferencia3","Fecha"));
+                                        Console.WriteLine(("").PadLeft(108,'-'));
+                                        foreach (Objeto obj in objs) {
+                                            Console.WriteLine(String.Format("|{0,6}|{1,15}|{2,15}|{3,8}|{4,15}|{5,15}|{6,15}|{7,10}|", CortarTexto(obj.Id.ToString(), 6), CortarTexto(obj.Descripcion, 15), CortarTexto(obj.NombrePropietario, 15), CortarTexto(obj.Valor.ToString(), 8), CortarTexto(obj.Preferencia1, 15), CortarTexto(obj.Preferencia2, 15), CortarTexto(obj.Preferencia3, 15), CortarTexto(obj.Fecha.ToString(),10)));
+                                        }
+                                        Console.WriteLine(("").PadLeft(108,'-'));
+
                                         Console.ForegroundColor = ConsoleColor.Gray;
                                         Console.ReadKey();
                                     } else {
@@ -626,11 +634,24 @@ namespace Trueque {
                             } else {
                                 MostrarMensajeError("La opción indicada no existe, favor indicar una opción válida");
                             }
-
                         }
+                    }
 
-                        
-
+                    if (opc == "4") {
+                        Console.Clear();
+                        List<Objeto> objs = (from o in losObjetos
+                                             orderby o.Id ascending
+                                             select o).ToList();
+                        int v = (from o in losObjetos 
+                                 select o.Valor).Sum();
+                        Console.WriteLine("Valorización: \n");
+                        foreach(Objeto obj in objs) {
+                            Console.WriteLine(obj.Descripcion.PadRight(25)+": $"+obj.Valor.ToString().PadLeft(8));
+                        }
+                            
+                        Console.WriteLine(("").PadLeft(36,'-'));
+                        Console.WriteLine(("Total").PadRight(25)+": $"+v.ToString().PadLeft(8));
+                        Console.ReadKey();
                     }
 
                 } else {
