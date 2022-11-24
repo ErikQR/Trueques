@@ -352,6 +352,7 @@ namespace Trueque {
                                                     Console.Clear();
                                                     //realizar busqueda de coincidencias del objeto recien ingresado
                                                     string siNo = "";
+                                                    string siNo2 = "";
                                                     while (siNo == "") {
                                                         Console.WriteLine(
                                                             "\n" +
@@ -398,6 +399,27 @@ namespace Trueque {
                                                             }
                                                         }
                                                     }
+                                                    while (siNo2 == "") {
+                                                        Console.WriteLine(
+                                                            "\n" +
+                                                            "Desea realizar un trueue de inmediato?" +
+                                                            "\n" +
+                                                            "1-Si \n" +
+                                                            "2-No ");
+                                                        siNo2 = Console.ReadLine();
+                                                        Console.Clear();
+                                                        if (siNo2=="1"|siNo2=="2") {
+                                                            switch (siNo2) { 
+                                                                case "1":
+                                                                    GestionarTrueque();
+                                                                    break;
+                                                                case "2":
+                                                                    Console.Clear();
+                                                                    break;
+                                                            }
+                                                        }
+                                                    }
+
                                                     agregar = true;
                                                     break;
                                                 case "2":
